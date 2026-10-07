@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 3456",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "npx serve out -l 3456",
+    "serve": "python3 -m http.server 8770 --bind 0.0.0.0 --directory out",
+    "lint": "eslint",
+    "format": "prettier --write app components lib"
   },
   "dependencies": {
     "next": "16.3.8",
@@ -20,6 +22,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.8",
+    "prettier": "^3.9.9",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
