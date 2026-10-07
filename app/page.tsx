@@ -6,11 +6,6 @@ import { useState, type FormEvent } from "react";
 import { clearRecentEvents, useRecentEvents } from "@/lib/recentEvents";
 import { resolveEventId } from "@/lib/resolveEvent";
 
-const REFERENCE_EVENTS = [
-  { id: 17126272, label: "Vojvodina 78–62 ŽKK Mega Superbet (basketball, Serbian 1. ŽLS)" },
-  { id: 16363867, label: "Manchester City 5–3 Sunderland (football, Premier League)" },
-];
-
 export default function Home() {
   const router = useRouter();
   const recent = useRecentEvents();
@@ -43,7 +38,7 @@ export default function Home() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="17126272, rQ or https://www.sofascore.com/football/match/…#id:16363867"
+            placeholder="Event id, customId or sofascore.com match URL"
             className="min-w-0 flex-1 rounded border border-zinc-300 px-3 py-2 font-mono text-sm"
             autoFocus
             spellCheck={false}
@@ -92,20 +87,6 @@ export default function Home() {
             ))}
           </ul>
         )}
-      </section>
-
-      <section className="rounded-2xl bg-white p-5 shadow-[0_1px_4px_rgba(34,34,38,0.08)]">
-        <h2 className="mb-2 font-semibold">Reference events</h2>
-        <ul className="divide-y divide-zinc-100">
-          {REFERENCE_EVENTS.map((event) => (
-            <li key={event.id}>
-              <Link href={`/event/?id=${event.id}`} className="flex gap-3 py-1.5 text-sm hover:text-blue-700">
-                <span className="w-20 shrink-0 font-mono text-zinc-500">{event.id}</span>
-                <span>{event.label}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </section>
     </div>
   );

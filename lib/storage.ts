@@ -3,6 +3,37 @@
 import { useSyncExternalStore } from "react";
 
 const CHANGE_EVENT = "sofa-event-viewer:storage";
+const PREFIX = "sofa-event-viewer:";
+const RUN_ID_KEY = `${PREFIX}runId`;
+
+/** Every server run starts clean: stored backend, recents and tab choice from an earlier run are dropped. */
+function resetOnNewRun(): void {
+  const runId = process.env.NEXT_PUBLIC_RUN_ID ?? "";
+  try {
+    const storage = window.localStorage;
+    if (storage.getItem(RUN_ID_KEY) === runId) {
+      return;
+    }
+    const stale: string[] = [];
+    for (let i = 0; i < storage.length; i++) {
+      const key = storage.key(i);
+      if (null !== key && key.startsWith(PREFIX)) {
+        stale.push(key);
+      }
+    }
+    for (const key of stale) {
+      storage.removeItem(key);
+    }
+    storage.setItem(RUN_ID_KEY, runId);
+  } catch {
+    // Storage blocked: nothing persisted, so nothing to reset.
+  }
+}
+
+// Module load, before apiBase applies a shared ?api= link on top of the clean state.
+if (typeof window !== "undefined") {
+  resetOnNewRun();
+}
 
 export function readRaw(key: string): string | null {
   try {
