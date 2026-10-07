@@ -6,8 +6,6 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   // Stop `next dev` from writing AGENTS.md and CLAUDE.md when an AI agent runs it.
   agentRules: false,
-  // New on every `next dev` start and `next build`; the browser wipes stored state when it changes.
-  env: { NEXT_PUBLIC_RUN_ID: String(Date.now()) },
 };
 
 export default nextConfig;
