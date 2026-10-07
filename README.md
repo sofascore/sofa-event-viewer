@@ -6,7 +6,7 @@ JSON. Read-only.
 
 ## Install
 
-Needs Node 24, pnpm and [just](https://github.com/casey/just) (`python3` for `just prod`).
+Needs Node 24, pnpm and [just](https://github.com/casey/just) (`python3` for `just prod` and `just host`).
 
 ```sh
 just install
@@ -16,7 +16,8 @@ just install
 
 ```sh
 just dev    # http://localhost:3456, reloads on save
-just prod   # builds and serves on port 8770 for everyone on your network; Ctrl+C stops it
+just prod   # production build on http://localhost:3457
+just host   # production build on port 8770 for everyone on your network; Ctrl+C stops it
 ```
 
 - Set the backend in the top bar (`master.dev.sofascore.dev`, a branch host or a full `https://…/api/v1` URL).
